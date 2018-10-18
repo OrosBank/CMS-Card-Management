@@ -1,0 +1,108 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model IEnumerable<ApplicationRoleListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var list = ViewBag.model as IEnumerable<ApplicationRoleListViewModel>;
+}
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <br />
+    @*<div class="panel-heading panel-head">Application Roles</div>*@
+    <div class="panel-body">
+        <br />
+        @*<div class="btn-group">
+                <a id="createRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" data-target="#modal-action-application-role" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>  Add Role
+                </a>
+            </div>*@
+
+        @if (ViewBag.RoleExist != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.RoleExist</strong>.
+            </div>
+
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.Success</strong>.
+            </div>
+
+        }
+
+        <form asp-action="AddEditApplicationRole" method="get" class="form-horizontal" role="form">
+            <input id="createRoleModal" type="submit" value="Add Role" class="btn btn-primary glyphicon glyphicon-plus" />
+        </form>
+
+        <div class="top-buffer"></div>
+        <br />
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-close">
+                    <div class="dropdown">
+                        <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                    </div>
+                </div>
+                <div class="card-header d-flex align-items-center">
+                    <h3 class="h4">Roles</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-responsive table-md">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Users</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in ViewBag.model)
+                            {
+                                <tr>
+                                    <td>@item.RoleName</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.NumberOfUsers</td>
+                                    <td>
+                                        <a asp-action="AddEditApplicationRole" asp-route-id="@item.Id"
+                                           class="btn btn-info">
+                                            <i class="glyphicon glyphicon-pencil"></i>  Edit
+                                        </a>
+                                        @*<form asp-action="AddEditApplicationRole" method="get" class="form-horizontal" role="form">
+                                                <input id="addEditApplicationRoleModal" type="submit" value="Edit" asp-route-id="@item.Id" class="btn btn-primary glyphicon glyphicon-pencil" />
+                                            </form>*@
+
+                                    </td>
+                                    <td>
+                                        @if (item.NumberOfUsers == 0)
+                                        {
+                                            <a asp-action="DeleteApplicationRole" asp-route-id="@item.Id" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                                            </a>
+                                            @*<form asp-action="DeleteApplicationRole" method="get" class="form-horizontal" role="form">
+                                                    <input id="deleteApplicationRoleModal" type="submit" value="Delete" asp-route-id="@item.Id" class="btn btn-danger glyphicon glyphicon-trash" />
+                                                </form>*@
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            @Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })
+

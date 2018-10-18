@@ -1,0 +1,10 @@
+C:\pp\CardAppMySql\CardAppMySql\obj\Debug\netcoreapp2.0\CardAppMySql.csproj.CoreCompileInputs.cache
+C:\pp\CardAppMySql\CardAppMySql\obj\Debug\netcoreapp2.0\CardAppMySql.AssemblyInfoInputs.cache
+C:\pp\CardAppMySql\CardAppMySql\obj\Debug\netcoreapp2.0\CardAppMySql.AssemblyInfo.cs
+C:\pp\CardAppMySql\CardAppMySql\bin\Debug\netcoreapp2.0\CardAppMySql.deps.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Debug\netcoreapp2.0\CardAppMySql.runtimeconfig.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Debug\netcoreapp2.0\CardAppMySql.runtimeconfig.dev.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Debug\netcoreapp2.0\CardAppMySql.dll
+C:\pp\CardAppMySql\CardAppMySql\bin\Debug\netcoreapp2.0\CardAppMySql.pdb
+C:\pp\CardAppMySql\CardAppMySql\obj\Debug\netcoreapp2.0\CardAppMySql.dll
+C:\pp\CardAppMySql\CardAppMySql\obj\Debug\netcoreapp2.0\CardAppMySql.pdb

@@ -1,0 +1,11 @@
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.1\CardAppMySql.deps.json
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.1\CardAppMySql.runtimeconfig.json
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.1\CardAppMySql.runtimeconfig.dev.json
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.1\CardAppMySql.dll
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.1\CardAppMySql.pdb
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.csprojAssemblyReference.cache
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.csproj.CoreCompileInputs.cache
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.AssemblyInfoInputs.cache
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.AssemblyInfo.cs
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.dll
+C:\Users\samson.awu\Desktop\CMP\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.1\CardAppMySql.pdb

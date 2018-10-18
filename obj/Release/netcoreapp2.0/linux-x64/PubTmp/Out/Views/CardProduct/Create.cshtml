@@ -1,0 +1,123 @@
+﻿@model CardProduct
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-12" style="top:50px">
+
+    <h2>Create Card Product</h2>
+
+    <form asp-action="Create" method="post" class="form-horizontal" role="form">
+
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="ProductName" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="ProductCode" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductCode" class="form-control" />
+                    <span asp-validation-for="ProductCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="ProductBin" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductBin" class="form-control" />
+                    <span asp-validation-for="ProductBin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="CurrencyCode" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="CurrencyCode" class="form-control" />
+                    <span asp-validation-for="CurrencyCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="CardType.Name" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <select asp-for="CardTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.CardType, "Id", "Name"))"></select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="Charge" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Charge" class="form-control" />
+                    <span asp-validation-for="Charge" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="ChargesAccount" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="ChargesAccount" class="form-control" />
+                    <span asp-validation-for="ChargesAccount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="FileType.Name" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <select asp-for="FileTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.FileType, "Id", "Name"))"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="VatAccount" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="VatAccount" class="form-control" />
+                    <span asp-validation-for="VatAccount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="VatAmount" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="VatAmount" class="form-control" />
+                    <span asp-validation-for="VatAmount" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="IsSecAccRequired" class="col-md-4 control-label"></label>
+                <br />
+                <div class="col-md-2">
+                    <input asp-for="IsSecAccRequired" class="form-control" />
+                    <span asp-validation-for="IsSecAccRequired" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="submit" class="btn btn-primary" />
+        </div>
+
+    </form>
+
+    <br /><br /><br />
+</div>

@@ -1,0 +1,98 @@
+﻿@model CardIssuance
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="col-md-12" style="top:50px">
+
+    <h2>Make Card Request</h2>
+
+    @if (ViewBag.GetCustomerFeedBack != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.GetCustomerFeedBack</strong>.
+        </div>
+
+    }
+
+    <form asp-action="GetCustomerDetails" method="post" class="form-horizontal" role="form">
+
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="col-md-4 control-label">Enter Account Number</label>
+                <div class="col-md-6">
+                    <input name="AccountNumber" type="text" placeholder="Account Number" id="accnumber" maxlength='10' class="form-control" />
+                </div>
+                <br />
+
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Find" class="btn btn-primary" />
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+            </div>
+
+
+            <hr />
+
+        </div>
+
+    </form>
+
+    <form asp-action="Create" method="post" class="form-horizontal" role="form">
+
+        <div class="col-md-12 form-horizontal">
+
+            @if (ViewBag.customer != null)
+            {
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="ProductId" class="col-md-4 control-label"></label>
+                        <div class="col-md-8">
+                            <select asp-for="ProductId" class="form-control" asp-items="@(new SelectList(ViewBag.CardProduct, "Id", "ProductName"))"></select>
+                        </div>
+                    </div>
+                </div>
+                if (ViewBag.GetCustomerFeedBack == null)
+                {
+                    @Html.Partial("~/Views/CardIssuance/_CustomerInfo.cshtml")
+                }
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="BranchId" class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <select asp-for="BranchId" class="form-control" asp-items="@(new SelectList(ViewBag.branch, "Id", "BranchName"))"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="PickUpBranchId" class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <select asp-for="PickUpBranchId" class="form-control" asp-items="@(new SelectList(ViewBag.branch, "Id", "BranchName"))"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4 col-lg-offset-4">
+                            <input type="submit" value="submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+
+
+    </form>
+
+
+    <br /><br /><br />
+</div>
+

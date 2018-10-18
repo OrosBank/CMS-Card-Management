@@ -1,0 +1,245 @@
+﻿@*@model IEnumerable<Cards.Models.CardIssuance>*@
+@using Cards.Models.ViewModels.CustomerViewModel
+@using Cards.DatabaseLink
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@model PaginatedList<IssuanceDisplayViewModel>
+@inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<ApplicationUser> UserManager
+@*@model IEnumerable<IssuanceDisplayViewModel>*@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var email = HttpContextAccessor.HttpContext.Session.GetString("email");
+
+    var _user = await UserManager.FindByEmailAsync(email);
+    var roleName = await UserManager.GetRolesAsync(_user);
+
+    int branchId = (int)HttpContextAccessor.HttpContext.Session.GetInt32("BranchId");
+
+}
+
+
+
+<div class="col-md-12" style="top:30px; font-size:15px">
+    <h2>Index</h2>
+    @if (ViewBag.CreatedRequest != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.CreatedRequest</strong>.
+        </div>
+
+    }
+
+    @if (ViewBag.RequestExist != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.RequestExist</strong>.
+        </div>
+
+    }
+
+    @if (ViewBag.nullRequest != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.nullRequest</strong>.
+        </div>
+
+    }
+
+    @if (ViewBag.message != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.message</strong>.
+        </div>
+
+    }
+
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color row">
+            <p>
+                Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" class="input-material" />
+                <br /><br />
+                <input type="submit" value="Search" class="btn btn-outline-info" />
+                <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
+            </p>
+        </div>
+    </form>
+    <hr />
+    <br />
+    <form asp-action="Create" method="get" class="form-horizontal" role="form">
+        <input type="submit" value="New Card Request" class="btn btn-primary fa fa-plus" />
+    </form>
+    <br />
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-close">
+                <div class="dropdown">
+                    <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                    <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                </div>
+            </div>
+            <div class="card-header d-flex align-items-center">
+                <h3 class="h4">Crad Issuance</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            @*<th>@Html.DisplayName("Id")</th>
+                                <th>@Html.DisplayName("CustomerId")</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ProductSortParm"]">@Html.DisplayName("Product")</a></th>
+                            @*<th>@Html.DisplayNameFor(model => model.Product)</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSortParm"]">@Html.DisplayName("CardStatus")</a></th>
+                            @*<th>@Html.DisplayNameFor(model => model.CardStatus)</th>*@
+                            @*<th>@Html.DisplayNameFor(model => model.PinStatus)</th>*@
+                            <th>@Html.DisplayName("CardVersion")</th>
+                            <th>@Html.DisplayName("NameOnCard")</th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["BranchSortParm"]">@Html.DisplayName("Branch")</a></th>
+                            @*<th>@Html.DisplayNameFor(model => model.Branch)</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["PickUpBranchSortParm"]">@Html.DisplayName("PickUpBranch")</a></th>
+                            @*<th>@Html.DisplayNameFor(model => model.PickUpBranch)</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["EntryDateSortParm"]">@Html.DisplayName("EntryDate")</a></th>
+                            @*<th>@Html.DisplayNameFor(model => model.EntryDate)</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpiryDateSortParm"]">@Html.DisplayName("ExpiryDate")</a></th>
+                            @*<th>@Html.DisplayName("ExpiryDate")</th>*@
+                            @*<th>Edit</th>
+                                <th>Delete</th>
+                                <th>Release</th>*@
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+
+                        <tr>
+                            @*<td>@Html.DisplayFor(m => item.Id)</td>
+        <td>@Html.DisplayFor(m => item.CustomerId)</td>*@
+                            <td>@Html.DisplayFor(m => item.Product)</td>
+                            <td>@Html.DisplayFor(m => item.CardStatus)</td>
+                            @*<td>@Html.DisplayFor(m => item.PinStatus)</td>*@
+                            <td>@Html.DisplayFor(m => item.CardVersion)</td>
+                            <td>@Html.DisplayFor(m => item.NameOnCard)</td>
+                            <td>@Html.DisplayFor(m => item.Branch)</td>
+                            <td>@Html.DisplayFor(m => item.PickUpBranch)</td>
+                            <td>@Html.DisplayFor(m => item.EntryDate)</td>
+                            <td>@Html.DisplayFor(m => item.ExpiryDate)</td>
+
+                            @if (roleName[0] == "Inputter")
+                            {
+                                if (item.CardStatus.Equals("Card Recieved From Dispatch") && item.PinStatus.Equals("Pin Recieved From Dispatch"))
+                                {
+
+                                    if (branchId == item.PickUpBranchId)
+                                    {
+                                        <td>
+                                            <a asp-action="ReleaseToCustomer" asp-route-id="@item.Id" data-toggle="tooltip" title="Release Card!"><i class="btn btn-outline-primary fa fa-thumbs-up" , style="color:green"></i></a>
+                                        </td>
+
+                                    }
+
+                                    else
+                                    {
+                                        <td>
+                                            <a data-toggle="tooltip" title="Card can only be Release from the Pick Up Branch!" class="unselectable" style="background-color: #ddd; cursor: not-allowed;"><i class="btn btn-outline-primary fa fa-thumbs-up" , style="color:green"></i></a>
+                                        </td>
+
+                                    }
+
+                                }
+
+                                else
+                                {
+                                    if (branchId == item.BranchId)
+                                    {
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit Request!"><i class="btn btn-outline-primary fa fa-edit" style="color:blue"></i></a>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete Request!"><i class="btn btn-outline-primary fa fa-trash-o" , style="color:red"></i></a>
+                                        </td>
+
+                                    }
+
+                                    else
+                                    {
+                                        <td>
+                                            <a data-toggle="tooltip" title="Edit Request!" class="unselectable" style="background-color: #ddd; cursor: not-allowed;"><i class="btn btn-outline-primary fa fa-edit" style="color:blue"></i></a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="tooltip" title="Delete Request!" class="unselectable" style="background-color: #ddd; cursor: not-allowed;"><i class="btn btn-outline-primary fa fa-trash-o" , style="color:red"></i></a>
+                                        </td>
+
+                                    }
+
+
+                                }
+
+
+                            }
+                            @if (roleName[0] == "Verifier")
+                            {
+                                if (item.CardStatus.Equals("New") || item.CardStatus.Equals("Unverified") && item.PinStatus.Equals("New") || item.PinStatus.Equals("Unverified"))
+                                {
+                                    if (branchId == item.BranchId)
+                                    {
+                                        <td>
+                                            <a asp-action="Verify" asp-route-id="@item.Id" data-toggle="tooltip" title="Verify Request!"><i class="btn btn-outline-primary fa fa-check" style="color:green"></i></a>
+                                        </td>
+                                    }
+
+                                    else
+                                    {
+                                        <td>
+                                            <a data-toggle="tooltip" title="Request Note from your Branch!" class="unselectable" style="background-color: #ddd; cursor: not-allowed;"><i class="btn btn-outline-primary fa fa-check" style="color:green"></i></a>
+                                        </td>
+                                    }
+
+                                }
+
+                            }
+                        </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @prevDisabled">
+                    Previous
+                </a>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @nextDisabled">
+                    Next
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <br />
+    <br />
+</div>
+

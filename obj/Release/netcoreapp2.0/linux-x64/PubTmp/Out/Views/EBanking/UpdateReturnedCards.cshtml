@@ -1,0 +1,64 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model PaginatedList<IssuanceDisplayViewModel>
+@{
+    ViewData["Title"] = "UpdateReturnedCards";
+}
+
+<br /><br />
+
+@if (ViewBag.feedback != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.feedback</strong>.
+    </div>
+
+}
+
+    <br />
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-close">
+            <div class="dropdown">
+                <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+            </div>
+        </div>
+        <div class="card-header d-flex align-items-center">
+            <h3 class="h4">Compact Table</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Main Batch</th>
+                        <th>Returned</th>
+                        <th>Dispatched</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in ViewBag.batch)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.MainBatch</td>
+                            <td>
+                                <a asp-action="Returned" asp-route-id="@item.Id"><i class="btn btn-outline-primary fa fa-check-circle" , style="color:green"></i></a>
+                                @*<input type="submit" name="decline" value="decline" class="btn btn-primary" />*@
+                            </td>
+                            <td>
+                                <a asp-action="Dispatched" asp-route-id="@item.Id"><i class="btn btn-outline-primary fa fa-check-circle" , style="color:green"></i></a>
+                                @*<input type="submit" name="verify" value="authorize" class="btn btn-primary" />
+                                    <input type="submit" name="decline" value="decline" class="btn btn-primary" />*@
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

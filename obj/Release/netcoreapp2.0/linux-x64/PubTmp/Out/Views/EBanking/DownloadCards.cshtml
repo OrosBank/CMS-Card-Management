@@ -1,0 +1,135 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model PaginatedList<IssuanceDisplayViewModel>
+@{
+    ViewData["Title"] = "DownloadCards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12" style="top:30px; font-size:15px">
+    <h2>Index</h2>
+    @*@if (ViewBag.CreatedRequest != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.CreatedRequest</strong>.
+            </div>
+
+        }
+
+        @if (ViewBag.RequestExist != null)
+        {
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.RequestExist</strong>.
+            </div>
+
+        }*@
+
+    <form asp-action="Process" method="post" class="form-horizontal" role="form">
+
+        <div class="form-horizontal row">
+            <div class="form-group col-md-4">
+                <select for="product" class="form-control" name="product" asp-items="@(new SelectList(ViewBag.AllProducts, "Id", "ProductName"))">
+                    <option disabled selected>--- Select Product ---</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <input type="submit" asp-action="DownloadCards" value="Search" class="btn btn-success btn-group-sm" />
+                <input type="submit" value="Download" class="btn btn-success btn-group-sm" />
+            </div>
+        </div>
+
+    </form>
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-close">
+                <div class="dropdown">
+                    <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                    <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                </div>
+            </div>
+            <div class="card-header d-flex align-items-center">
+                <h3 class="h4"></h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-responsive table-md">
+                    <thead>
+                        <tr>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ProductSortParm"]">@Html.DisplayName("Product")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSortParm"]">@Html.DisplayName("CardStatus")</a></th>
+                            <th>@Html.DisplayName("Card Version")</th>
+                            <th>@Html.DisplayName("Name On Card")</th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["BranchSortParm"]">@Html.DisplayName("Branch")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["PickUpBranchSortParm"]">@Html.DisplayName("Pick Up Branch")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["EntryDateSortParm"]">@Html.DisplayName("Entry Date")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpiryDateSortParm"]">@Html.DisplayName("Expiry Date")</a></th>
+                            @*<th>@Html.ActionLink("Approve All", "Process", new { sortOrder = ViewBag.NameSortParm })</th>
+                    <th>@Html.ActionLink("Decline All", "Process", new { sortOrder = ViewBag.NameSortParm })</th>
+                    <th>@Html.ActionLink("ReIssue All Card", "ReIssue", new { sortOrder = ViewBag.NameSortParm })</th>
+                    <th>@Html.ActionLink("ReIssue All Pin", "ReIssue", new { sortOrder = ViewBag.NameSortParm })</th>*@
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Product)</td>
+                                <td>@Html.DisplayFor(m => item.CardStatus)</td>
+                                <td>@Html.DisplayFor(m => item.CardVersion)</td>
+                                <td>@Html.DisplayFor(m => item.NameOnCard)</td>
+                                <td>@Html.DisplayFor(m => item.Branch)</td>
+                                <td>@Html.DisplayFor(m => item.PickUpBranch)</td>
+                                <td>@Html.DisplayFor(m => item.EntryDate)</td>
+                                <td>@Html.DisplayFor(m => item.ExpiryDate)</td>
+
+                                @*<td>
+                            <a asp-action="ProcessSingle" asp-route-id="@item.Id"><i class="btn btn-outline-primary fa fa-check-circle" , style="color:green"></i></a>
+
+                        </td>
+                        <td>
+                            <a asp-action="ProcessSingle" asp-route-id="@item.Id"><i class="btn btn-outline-primary fa fa-times-circle" , style="color:red"></i></a>
+                        </td>
+                        <td>
+                            <a asp-controller="EBanking" asp-action="ReIssueCardSinge" asp-route-id="@item.Id" data-toggle="tooltip" title="Re-Issue Card!"><i class="btn btn-outline-primary fa fa-credit-card" style="color:blue"></i></a>
+                        </td>
+                        <td>
+                            <a asp-controller="EBanking" asp-action="ReIssuePinSinge" asp-route-id="@item.Id" data-toggle="tooltip" title="Re-Issue-Pin!"><i class="btn btn-outline-primary fa fa-key" style="color:green"></i></a>
+                        </td>*@
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @prevDisabled">
+                    Previous
+                </a>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @nextDisabled">
+                    Next
+                </a>
+            </div>
+        </div>
+    </div>
+
+        <br />
+        <br />
+    </div>
+

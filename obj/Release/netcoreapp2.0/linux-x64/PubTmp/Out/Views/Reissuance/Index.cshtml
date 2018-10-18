@@ -1,0 +1,138 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model PaginatedList<IssuanceDisplayViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="col-md-12" style="top:30px; font-size:15px">
+    @if (ViewBag.CreatedRequest != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.CreatedRequest</strong>.
+        </div>
+
+    }
+
+    @if (ViewBag.PinMessage != null)
+    {
+        <div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.PinMessage</strong>.
+        </div>
+
+    }
+
+    @if (ViewBag.CardMessage != null)
+    {
+        <div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.CardMessage</strong>.
+        </div>
+
+    }
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color row">
+            <p>
+                @*Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" class="input-material" />*@
+                <label for="find" class="label-material"></label>
+                <input id="find" value="@ViewData["currentFilter"]" name="SearchString" placeholder="Name/PAN/Account" class="form-control">
+                <br />
+                <input type="submit" value="Search" class="btn btn-outline-info" />
+                <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
+            </p>
+        </div>
+    </form>
+    <hr />
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-close">
+                <div class="dropdown">
+                    <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                    <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                </div>
+            </div>
+            <div class="card-header d-flex align-items-center">
+                <h3 class="h4">Re-Issuance</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-responsive table-md">
+                    <thead>
+                        <tr>
+                            @*<th>@Html.DisplayName("Id")</th>
+                                <th>@Html.DisplayName("CustomerId")</th>*@
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ProductSortParm"]">@Html.DisplayName("Product")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSortParm"]">@Html.DisplayName("CardStatus")</a></th>
+                            <th>@Html.DisplayName("CardVersion")</th>
+                            <th>@Html.DisplayName("NameOnCard")</th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["BranchSortParm"]">@Html.DisplayName("Branch")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["PickUpBranchSortParm"]">@Html.DisplayName("PickUpBranch")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["EntryDateSortParm"]">@Html.DisplayName("EntryDate")</a></th>
+                            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpiryDateSortParm"]">@Html.DisplayName("ExpiryDate")</a></th>
+                            <th>@Html.DisplayName("Card")</th>
+                            <th>@Html.DisplayName("Pin")</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+
+                            <tr>
+                                @*<td>@Html.DisplayFor(m => item.Id)</td>
+                                    <td>@Html.DisplayFor(m => item.CustomerId)</td>*@
+                                <td>@Html.DisplayFor(m => item.Product)</td>
+                                <td>@Html.DisplayFor(m => item.CardStatus)</td>
+                                <td>@Html.DisplayFor(m => item.CardVersion)</td>
+                                <td>@Html.DisplayFor(m => item.NameOnCard)</td>
+                                <td>@Html.DisplayFor(m => item.Branch)</td>
+                                <td>@Html.DisplayFor(m => item.PickUpBranch)</td>
+                                <td>@Html.DisplayFor(m => item.EntryDate)</td>
+                                <td>@Html.DisplayFor(m => item.ExpiryDate)</td>
+
+                                <td>
+                                    <a asp-action="Card" asp-route-id="@item.Id" data-toggle="tooltip" title="Re-Issue Card!"><i class="btn btn-outline-primary fa fa-credit-card" style="color:blue"></i></a>
+                                </td>
+                                <td>
+                                    <a asp-action="Pin" asp-route-id="@item.Id" data-toggle="tooltip" title="Re-Issue-Pin!"><i class="btn btn-outline-primary fa fa-key" style="color:green"></i></a>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @prevDisabled">
+                    Previous
+                </a>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @nextDisabled">
+                    Next
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+</div>

@@ -1,0 +1,154 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model EditCustomerViewModel
+@{
+    ViewData["Title"] = "Process";
+}
+
+
+
+<form asp-action="Authorization" method="post" class="form-horizontal" role="form">
+    <h4>Authorization</h4>
+    <div>
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <label asp-for="accountName" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="accountName" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="accountName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="AccountNumber" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="AccountNumber" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-forAccountTypeName" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="AccountTypeName" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AccountTypeName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="AccountType" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="AccountType" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AccountType" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Gender" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Gender" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label asp-for="Birthday" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Birthday" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Birthday" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="CustomerId" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="CustomerId" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="CustomerAddress" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="CustomerAddress" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="CustomerEmail" class="col-md-4 control-label"></label>
+                <br />
+                <div class="col-md-8">
+                    <input asp-for="CustomerEmail" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="CustomerMobile" class="col-md-4 control-label"></label>
+                <br />
+                <div class="col-md-8">
+                    <input asp-for="CustomerMobile" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CustomerMobile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Branch" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    @*<select asp-for="Branch" class="form-control" asp-items="@(new SelectList(ViewBag.branch, "Id", "BranchName"))" readonly="readonly"></select>*@
+                    <input asp-for="Branch" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="PickUpBranch" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    @*<select asp-for="PickUpBranch" class="form-control" asp-items="@(new SelectList(ViewBag.branch, "Id", "BranchName"))" readonly="readonly"></select>*@
+                    <input asp-for="PickUpBranch" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="NameOnCard" class="col-md-4 control-label"></label>
+                <br />
+                <div class="col-md-8">
+                    <input asp-for="NameOnCard" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="NameOnCard" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="WaiveCharge" class="col-md-4 control-label"></label>
+                <br />
+                <div class="col-md-8">
+                    <input asp-for="WaiveCharge" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="WaiveCharge" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 col-lg-offset-4">
+                <input type="submit" name="verify" value="authorize" class="btn btn-primary" />
+                <input type="submit" name="decline" value="decline" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+</form>
+

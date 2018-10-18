@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Cards.Models.CardProduct>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="col-md-12" style="top:30px">
+    <br />
+    <form asp-action="Create" method="get" class="form-horizontal" role="form">
+        <input type="submit" value="Add Product" class="btn btn-primary glyphicon glyphicon-plus" />
+    </form>
+    <br />
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-close">
+                <div class="dropdown">
+                    <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                    <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                </div>
+            </div>
+            <div class="card-header d-flex align-items-center">
+                <h3 class="h4">Card Products</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-responsive table-md">
+                    <thead>
+                        <tr>
+                            @*<th>@Html.DisplayNameFor(model => model.Id)</th>*@
+                            @*<th>@Html.DisplayNameFor(model => model.CardType.Name)</th>*@
+                            <th>@Html.DisplayNameFor(model => model.Charge)</th>
+                            <th>@Html.DisplayNameFor(model => model.ChargesAccount)</th>
+                            @* <th>@Html.DisplayNameFor(model => model.CreateDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>*@
+                            <th>@Html.DisplayNameFor(model => model.CurrencyCode)</th>
+                            <th>@Html.DisplayNameFor(model => model.FileType.Name)</th>
+                            @*<th>@Html.DisplayNameFor(model => model.IsSecAccRequired)</th>*@
+                            @*<th>@Html.DisplayName("Sec Acc Required")</th>*@
+                            <th>@Html.DisplayNameFor(model => model.ProductBin)</th>
+                            <th>@Html.DisplayNameFor(model => model.ProductCode)</th>
+                            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                            <th>@Html.DisplayNameFor(model => model.VatAccount)</th>
+                            <th>@Html.DisplayNameFor(model => model.VatAmount)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            string IsSec = item.IsSecAccRequired.ToString();
+
+                            <tr>
+                                @*<td>@Html.DisplayFor(m => item.Id)</td>*@
+                                @*<td>@Html.DisplayFor(m => item.CardTypeId)</td>*@
+                                <td>@Html.DisplayFor(m => item.Charge)</td>
+                                <td>@Html.DisplayFor(m => item.ChargesAccount)</td>
+                                @*<td>@Html.DisplayFor(m => item.CreateDate)</td>
+                                    <td>@Html.DisplayFor(m => item.CreatedBy)</td>*@
+                                <td>@Html.DisplayFor(m => item.CurrencyCode)</td>
+                                <td>@Html.DisplayFor(m => item.FileTypeId)</td>
+                                @*<td>@Html.DisplayFor(m => item.IsSecAccRequired)</td>*@
+                                @*<td>@IsSec</td>*@
+                                <td>@Html.DisplayFor(m => item.ProductBin)</td>
+                                <td>@Html.DisplayFor(m => item.ProductCode)</td>
+                                <td>@Html.DisplayFor(m => item.ProductName)</td>
+                                <td>@Html.DisplayFor(m => item.VatAccount)</td>
+                                <td>@Html.DisplayFor(m => item.VatAmount)</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Verify Request!"><i class="btn btn-outline-primary btn-sm fa fa-check" style="color:green"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Verify Request!"><i class="btn btn-outline-primary btn-sm fa fa-trash" style="color:red"></i></a>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <br /><br /><br />
+

@@ -1,0 +1,27 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+@model ApplicationRoleViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var list = ViewBag.model as IEnumerable<ApplicationRoleListViewModel>;
+}
+
+<form asp-action="AddEditApplicationRole" role="form">
+  
+    <div class="modal-body form-horizontal col-md-6">
+            <div class="form-group">
+                <label asp-for="RoleName" class="col-md-6 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="RoleName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="col-md-6 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Description" class="form-control" />
+                </div>
+            </div>
+
+        @Html.Partial("_ModalFooter", new ModalFooter { })
+    </div>
+
+</form>

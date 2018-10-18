@@ -1,0 +1,99 @@
+﻿@model IEnumerable<UserListViewModel>
+@using Cards.Models.ViewModels.CustomerViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <br />
+    @*<div class="panel-heading panel-head">Users</div>*@
+    <br />
+    <div class="panel-body">
+        @if (ViewBag.Uername != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.Uername</strong>.
+            </div>
+
+        }
+
+        @if (ViewBag.RoleCreated != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.RoleCreated</strong>.
+            </div>
+
+        }
+
+        <div class="btn-group">
+            @*<a id="createEditUserModal" data-toggle="modal" asp-action="AddUser" data-target="#modal-action-user" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>  Add User
+                </a>*@
+            <form asp-action="AddUser" method="get" class="form-horizontal" role="form">
+                <input id="createEditUserModal" type="submit" value="Add User" class="btn btn-primary glyphicon glyphicon-plus" />
+            </form>
+
+        </div>
+        <div class="top-buffer"></div>
+        <br />
+
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-close">
+                    <div class="dropdown">
+                        <button type="button" id="closeCard4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard4" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                    </div>
+                </div>
+                <div class="card-header d-flex align-items-center">
+                    <h3 class="h4">Users</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-responsive table-md">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Branch</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.RoleName</td>
+                                <td>@item.BranchName</td>
+                                <td>
+                                    <a id="editUserModal" asp-action="EditUser" asp-route-id="@item.Id"
+                                       class="btn btn-info">
+                                        <i class="glyphicon glyphicon-pencil"></i>  Edit
+                                    </a>
+                                </td>
+                                <td>
+                                    <a id="deleteUserModal" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>  Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
+
+@*@section scripts
+        {
+        <script src="~/js/user-index.js" asp-append-version="true"></script>
+    }*@

@@ -1,0 +1,10 @@
+C:\pp\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.0\linux-x64\CardAppMySql.deps.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.0\linux-x64\CardAppMySql.runtimeconfig.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.0\linux-x64\CardAppMySql.runtimeconfig.dev.json
+C:\pp\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.0\linux-x64\CardAppMySql.dll
+C:\pp\CardAppMySql\CardAppMySql\bin\Release\netcoreapp2.0\linux-x64\CardAppMySql.pdb
+C:\pp\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.0\linux-x64\CardAppMySql.csproj.CoreCompileInputs.cache
+C:\pp\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.0\linux-x64\CardAppMySql.AssemblyInfoInputs.cache
+C:\pp\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.0\linux-x64\CardAppMySql.AssemblyInfo.cs
+C:\pp\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.0\linux-x64\CardAppMySql.dll
+C:\pp\CardAppMySql\CardAppMySql\obj\Release\netcoreapp2.0\linux-x64\CardAppMySql.pdb

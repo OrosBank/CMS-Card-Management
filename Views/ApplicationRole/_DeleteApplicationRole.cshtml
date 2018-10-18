@@ -1,0 +1,16 @@
+﻿@using Cards.Models.ViewModels.CustomerViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var list = ViewBag.model as IEnumerable<ApplicationRoleListViewModel>;
+}
+
+<form asp-action="DeleteApplicationRole" role="form">
+
+    <div class="modal-body form-horizontal col-md-6">
+        Are you want to delete @Model?
+        @Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+    </div>
+
+</form>
+
